@@ -6,6 +6,13 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/jumble")
+def jumble():
+    return render_template("jumble.html")
+
+@app.route("/reveal")
+def reveal():
+    return "This is the reveal route"
 
 
 
