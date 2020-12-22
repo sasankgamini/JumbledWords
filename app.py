@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from flask_pymongo import PyMongo
 app = Flask(__name__)
 
@@ -6,9 +6,14 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/jumble")
+@app.route("/jumble", methods = ["GET", "POST"])
 def jumble():
-    return render_template("jumble.html")
+    if request.method == "GET":
+        return render_template("jumble.html")
+    else:
+        word = request.form["wordEntered"]
+        print(word)
+        return redirect("/jumble")
 
 @app.route("/reveal")
 def reveal():
