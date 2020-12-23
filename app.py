@@ -1,8 +1,18 @@
 from flask import Flask, render_template, redirect, request
 from flask_pymongo import PyMongo
 import random
+import os
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://sasank_23:23_sasank@databases.ju9ys.mongodb.net/jumbledWords?retryWrites=true&w=majority" 
+
+if os.environ.get("MONGO_URI") == None:
+    file = open("connectionstring.txt","r")
+    connectionstring = file.read().strip()
+    file.close()
+    app.config["MONGO_URI"] = connectionstring
+    print('running on local server')
+else:
+    app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+
 mongo = PyMongo(app)
 
 @app.route("/")
