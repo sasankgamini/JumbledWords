@@ -33,12 +33,24 @@ def jumble():
         mongo.db.words.insert_one(wordDB)
         return redirect("/jumble")
 
-@app.route("/reveal")
+@app.route("/reveal", methods = ["GET","POST"])
 def reveal():
-    return "This is the reveal route"
+    if request.method == "GET":
+        JumbledWordCursor = mongo.db.words.aggregate([{ "$sample": {"size": 1}}])
+        for n in JumbledWordCursor:
+            JumbledWord = (n['jumbledWord'])
+        return render_template("reveal.html", JumbledWord=JumbledWord)
+    else:
+        usersAnswer = request.form['wordEntered']
+        JumbledWord = request.form['JumbledWord']
+        correctAnswer = mongo.db.words.find_one({'jumbledWord':JumbledWord})['originalWord']
+        if usersAnswer == correctAnswer:
+            return "Correct Answer"
+        else:
+            return "Wrong Answer"
 
 
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

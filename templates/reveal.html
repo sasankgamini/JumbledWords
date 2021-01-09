@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Jumble</title>
+        <title>Reveal</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../static/style.css">
@@ -14,14 +14,16 @@
     </head>
     <body>
         <div class="topdiv">
-            <h1>Welcome to the Jumble Route</h1>
-            <h2>Here You Can Add Words To The Database</h2>
+            <h1>Welcome to the Reveal Route</h1>
+            <h2>Here You Can Guess Jumbled Words</h2>
         </div>
 
         <div class="bottomdiv">
+            <p>{{JumbledWord}}</p>
             <form method="POST">
-                <input type="text" id="addentry" name="wordEntered">
-                <input type="submit" value="Add" class="button" id="add">
+                <input type="text" id="addentry" name="wordEntered" placeholder="Answer">
+                <input type="text" value="{{JumbledWord}}" name="JumbledWord" hidden>
+                <input type="submit" value="Finish" id="finish" class="button" >
             </form> 
         </div>
       

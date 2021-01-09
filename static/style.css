@@ -32,6 +32,10 @@ body{
     background-color: #EFB261; /* Blue */
   }
 
+  #finish{
+    background-color: #008CBA !important;
+  }
+
   #addentry{
       height: 50px;
       width: 1000px;
